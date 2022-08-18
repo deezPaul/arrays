@@ -8,7 +8,7 @@ class MainProgramm {
     private static int[] numbers;
 
     public static void main(String[] args){
-        withNegatives = false;
+        withNegatives = true;
         maxAbsolute = 100;
         numbers = new int[10];
         fillArray(numbers, withNegatives, maxAbsolute);
@@ -57,6 +57,9 @@ class MainProgramm {
     private static int sumUp(int[] array){
         int result = 0;
         //Hier muss Quellcode ergänzt werden.
+        for (int i = 0; i < array.length; i++) { //zählt durch alle Werte im array
+            result += array[i]; //addiert mit jedem Mal den integer result mit den jeweiligen Wert des arrays zusammen
+        }
         return result;
     }
 
@@ -70,6 +73,9 @@ class MainProgramm {
     private static int countNegatives(int[] array){
         int result = 0;
         //Hier muss Quellcode ergänzt werden.
+        for (int i = 0; i < array.length; i++) { //zählt durch alle Werte im array
+            if (array[i] < 0) result++; //result wird um 1 inkrementiert, falls der Wert in dem array negativ ist
+        }
         return result;
     }
 
@@ -83,6 +89,9 @@ class MainProgramm {
     private static int sumUpNegatives(int[] array){
         int result = 0;
         //Hier muss Quellcode ergänzt werden.
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] < 0) result += array[i];
+        }
         return result;
     }
 
@@ -93,7 +102,13 @@ class MainProgramm {
      * übergeben bekommt und die den größten Wert in diesem Array zurückgibt.
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
-
+    public static int findMaximum(int[] array) {
+        int maximum = array[0];
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > maximum) maximum = array[i];
+        }
+        return maximum;
+    }
 
 
     /** 5. Bestimmen des Index des Maximums in einem Feld
@@ -101,6 +116,17 @@ class MainProgramm {
      * übergeben bekommt und die den Index des größten Werts in diesem Array zurückgibt.
      * Tipp: Versuchen Sie, mit einem Durchlauf durch das Array zu kommen.
      */
+    public static int findMaximumIndex(int[] array) {
+        int maximum = array[0];
+        int result = 0;
+        for (int i = 1; i < array.length; i++) {
+            if (array[i] > maximum) {
+                maximum = array[i];
+                result = i;
+            }
+        }
+        return result;
+    }
 
 
 
@@ -108,15 +134,36 @@ class MainProgramm {
      * Schreiben Sie eine Methode countMaximum, die ein Array des Typs int als Parameter
      * übergeben bekommt und die Häufigkeit der größten Zahl in diesem Array zurückgibt.
      */
-
-
+    public static int countMaximum(int[] array) {
+        int maximum = -100;
+        int result = 1;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > maximum) {
+                maximum = array[i];
+                result = 1;
+            } else if (array[i] == maximum) {
+                result++;
+            }
+        }
+        return result;
+    }
 
     /** 7. Sortierung prüfen
      * Schreiben Sie eine Methode isSorted, die als Parameter ein Array des Typs int
      * übergeben bekommt. Die Methode isSorted soll true zurückgeben, falls die im Array enthaltenen Werte aufsteigend sortiert sind.
      * Sonst soll false zurückgegeben werden.
      */
-
+    public static boolean isSorted(int[] array) {
+        int lastValue = -100;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] > lastValue) {
+                array[i] = lastValue;
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
 
 
     /** 8. Palindrome
@@ -126,8 +173,18 @@ class MainProgramm {
      * ob es sich bei dem Array um ein Palindrom handelt.
      * Die Methode soll einen Wert des Typs boolean zurückgeben.
      */
-
-
+    public static boolean checkArray(int[] array) {
+        int proofNumber;
+        for (int i = 0; i < array.length; i++) {
+            proofNumber = array.length - 1;
+            if (!(array[i] == array[proofNumber])) {
+                return false;
+            } else {
+                proofNumber--;
+            }
+        }
+        return true;
+    }
 
     /** 9. Erhöhen der Inhalte eines Feldes
      * Schreiben Sie eine Methode increaseArray, die als Parameter ein Array des Typs int und einen int-Wert erhält.
@@ -135,6 +192,10 @@ class MainProgramm {
      * Beispiel: Werden ein Array mit den Elementen 80,7,1,56,11,72,43,37 als erstes und der Wert 17 als zweites Argument übergeben,
      * so soll ein neues(!) Array mit den Werten 97,24,18,73,28,89,60,54 zurückgegeben werden.
      */
-
-
+    public static int[] increaseArray(int[] array, int incrementValue) {
+        for (int i = 0; i < array.length; i++) {
+            array[i] += incrementValue;
+        }
+        return array;
+    }
 }
